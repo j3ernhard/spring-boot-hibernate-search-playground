@@ -26,11 +26,11 @@ public class Article extends AbstractEntity {
     private String eli;
 
 
-    @FullTextField(name = "title", analyzer = "german")
+    @FullTextField(name = "title", analyzer = "legal-text-german")
     @GenericField(name = "title_sort", sortable = Sortable.YES)
     private String title;
     
-    @FullTextField(name = "text", analyzer = "german")
+    @FullTextField(name = "text", analyzer = "legal-text-german")
     @Column(length = 4096)
     private String text; 
 

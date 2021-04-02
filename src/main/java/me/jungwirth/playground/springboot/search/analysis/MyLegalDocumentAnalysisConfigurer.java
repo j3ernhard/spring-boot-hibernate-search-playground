@@ -14,7 +14,7 @@ public class MyLegalDocumentAnalysisConfigurer implements LuceneAnalysisConfigur
 
     @Override
     public void configure(LuceneAnalysisConfigurationContext context) {
-        context.analyzer("german").custom()
+        context.analyzer("legal-text-german").custom()
             .tokenizer(
                 StandardTokenizerFactory.class)
             .tokenFilter(
