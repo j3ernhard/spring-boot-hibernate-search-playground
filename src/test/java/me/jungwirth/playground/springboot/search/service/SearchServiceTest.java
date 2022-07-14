@@ -21,7 +21,8 @@ public class SearchServiceTest {
     @Test
     public void testSearchService() {
 
-        SearchRequest request = new SearchRequest("Maßnahmen", "", null);
+        SearchRequest request = new SearchRequest("Maßnahmen", "", null,null);
+        
         SearchResponse<Article> result = searchService.searchQuery(request);
 
         assertEquals(2, result.getResult().size());

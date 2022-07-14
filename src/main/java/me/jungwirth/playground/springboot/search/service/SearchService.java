@@ -11,10 +11,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.search.engine.search.aggregation.AggregationKey;
 import org.hibernate.search.engine.search.query.SearchResult;
-import org.hibernate.search.engine.search.sort.dsl.SearchSortFactory;
 import org.hibernate.search.engine.search.sort.dsl.SortOrder;
-import org.hibernate.search.engine.search.sort.dsl.SortOrderStep;
-import org.hibernate.search.engine.search.sort.spi.SearchSortBuilder;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.massindexing.MassIndexer;
 import org.hibernate.search.mapper.orm.session.SearchSession;
