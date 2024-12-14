@@ -1,14 +1,12 @@
 package me.jungwirth.playground.springboot.search.model;
 
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
@@ -20,7 +18,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmb
 @Indexed
 public class Article extends AbstractEntity {
 
-    @GenericField(name = "number", sortable = Sortable.YES)
+    @GenericField(name = "number") // , sortable = )
     private String number;
 
     private String eli;

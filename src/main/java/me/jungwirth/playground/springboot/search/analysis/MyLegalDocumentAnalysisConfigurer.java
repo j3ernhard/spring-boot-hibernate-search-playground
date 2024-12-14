@@ -8,7 +8,6 @@ import org.hibernate.search.backend.lucene.analysis.LuceneAnalysisConfigurationC
 import org.hibernate.search.backend.lucene.analysis.LuceneAnalysisConfigurer;
 import org.springframework.stereotype.Component;
 
-
 @Component("LegalDocumentAnalysisConfigurer")
 public class MyLegalDocumentAnalysisConfigurer implements LuceneAnalysisConfigurer {
 
@@ -22,7 +21,7 @@ public class MyLegalDocumentAnalysisConfigurer implements LuceneAnalysisConfigur
             .tokenFilter(
                 SnowballPorterFilterFactory.class)
                     .param("language", "German")
-            .tokenFilter(ASCIIFoldingFilterFactory.class);   
+            .tokenFilter(ASCIIFoldingFilterFactory.class);
             
     }
 

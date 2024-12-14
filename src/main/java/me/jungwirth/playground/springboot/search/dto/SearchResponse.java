@@ -1,20 +1,20 @@
 package me.jungwirth.playground.springboot.search.dto;
 
 import java.util.List;
+import org.springframework.data.web.PagedModel;
 
-import org.springframework.hateoas.PagedModel.PageMetadata;
 
 public class SearchResponse<T> {
 
     private List<T> result;
 
-    private PageMetadata page;
+    private PagedModel.PageMetadata page;
 
     private List<SearchAggregation> abbreviations;
 
     public SearchResponse() {}
 
-    public SearchResponse(List<T> result, PageMetadata page, List<SearchAggregation> aggregations) {
+    public SearchResponse(List<T> result, PagedModel.PageMetadata page, List<SearchAggregation> aggregations) {
         this.result = result;
         this.page = page;
         this.abbreviations = aggregations;
@@ -28,11 +28,11 @@ public class SearchResponse<T> {
         this.result = result;
     }
 
-    public PageMetadata getPage() {
+    public PagedModel.PageMetadata getPage() {
         return page;
     }
 
-    public void setPage(PageMetadata page) {
+    public void setPage(PagedModel.PageMetadata page) {
         this.page = page;
     }
 

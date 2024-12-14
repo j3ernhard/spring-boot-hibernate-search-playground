@@ -1,27 +1,20 @@
 package me.jungwirth.playground.springboot.search.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
-import org.hibernate.search.engine.search.aggregation.AggregationKey;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.hibernate.search.engine.search.query.SearchResult;
-import org.hibernate.search.engine.search.sort.dsl.SortOrder;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.massindexing.MassIndexer;
 import org.hibernate.search.mapper.orm.session.SearchSession;
-import org.springframework.hateoas.PagedModel.PageMetadata;
+import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
 
-import me.jungwirth.playground.springboot.search.dto.SearchAggregation;
 import me.jungwirth.playground.springboot.search.dto.SearchRequest;
 import me.jungwirth.playground.springboot.search.dto.SearchResponse;
 import me.jungwirth.playground.springboot.search.model.Article;
+
 
 @Service
 public class SearchService {
@@ -32,15 +25,17 @@ public class SearchService {
     @PostConstruct
     public void initialize() {
 
-        SearchSession searchSession = Search.session(entityManager.getEntityManagerFactory().createEntityManager());
-        MassIndexer indexer = searchSession.massIndexer(Article.class).threadsToLoadObjects(2);
+
+        SearchSession searchSession = Search.session(entityManager);
+        MassIndexer massIndexer = searchSession.massIndexer(Article.class).threadsToLoadObjects(2);
 
         try {
-            indexer.startAndWait();
+            massIndexer.startAndWait();
         } catch (InterruptedException e) {
+
             e.printStackTrace();
         }
-        
+
     }
 
     /**
@@ -57,7 +52,10 @@ public class SearchService {
                 .matching(request.keyword))
             .fetch(20);
 
-        return new SearchResponse<>(result.hits(), new PageMetadata(20, 0, result.total().hitCount()), null);
+
+        return new SearchResponse<>(result.hits(), new PagedModel.PageMetadata(20, 0, result.total().hitCount(),1), null);
+
+
     }
 
     /**
@@ -77,15 +75,18 @@ public class SearchService {
                 request.page.getPageSize()
             );
 
+
+
         return new SearchResponse<>(
             result.hits(), 
-            new PageMetadata(request.page.getPageSize(), request.page.getPageNumber(), result.total().hitCount()),
+            new PagedModel.PageMetadata(request.page.getPageSize(), request.page.getPageNumber(), result.total().hitCount(),1),
             null);
+
     }
 
     @Transactional
     public SearchResponse<Article> searchTitleQueryPaginationAndSort(SearchRequest request) {
-
+        /*
         SearchSession searchSession = Search.session(entityManager);
         SearchResult<Article> result = searchSession.search(Article.class)
             .where(f -> f.match().fields("document.title", "document.abbreviation")
@@ -100,10 +101,13 @@ public class SearchService {
             result.hits(), 
             new PageMetadata(request.page.getPageSize(), request.page.getPageNumber(), result.total().hitCount()),
             null);
+         */
+        return null;
     }
 
     @Transactional
     public SearchResponse<Article> searchQueryAggregation(SearchRequest request) {
+        /*
         SearchSession searchSession = Search.session( entityManager );
 
         AggregationKey<Map<String, Long>> countByAbbreviation = AggregationKey.of("countByAbbreviation");
@@ -123,6 +127,9 @@ public class SearchService {
         SearchResponse<Article> response = new SearchResponse<>(result.hits(), null, facetAbbreviation);
         
         return response;
+
+         */
+        return null;
     }
 
     /**
@@ -131,6 +138,7 @@ public class SearchService {
      */
     @Transactional
     public SearchResponse<Article> searchQuery(SearchRequest request) {
+        /*
         SearchSession searchSession = Search.session( entityManager );
 
         AggregationKey<Map<String, Long>> countByAbbreviation = AggregationKey.of("countByAbbreviation");
@@ -163,5 +171,8 @@ public class SearchService {
             facetAbbreviation);
         
         return response;
+
+         */
+        return null;
     }
 }

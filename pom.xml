@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
+		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.jungwirth.playground.springboot</groupId>
@@ -14,9 +14,9 @@
 	<name>search</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<hibernate.search.version>6.1.5.Final</hibernate.search.version>
+		<hibernate.search.version>7.2.2.Final</hibernate.search.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -38,20 +38,14 @@
 
 		<!-- Hibernate Search dependencies -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate.search -->
-		<dependency>
-			<groupId>org.hibernate.search</groupId>
-			<artifactId>hibernate-search-engine</artifactId>
-			<version>${hibernate.search.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate.search</groupId>
 			<artifactId>hibernate-search-mapper-orm</artifactId>
-			<version>${hibernate.search.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.search</groupId>
 			<artifactId>hibernate-search-backend-lucene</artifactId>
-			<version>${hibernate.search.version}</version>
 		</dependency>
 
 		<dependency>
@@ -71,6 +65,18 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.hibernate.search</groupId>
+				<artifactId>hibernate-search-bom</artifactId>
+				<version>${hibernate.search.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>

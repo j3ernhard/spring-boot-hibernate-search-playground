@@ -1,14 +1,12 @@
 package me.jungwirth.playground.springboot.search.model;
 
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import org.hibernate.search.engine.backend.types.Aggregable;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
@@ -21,7 +19,6 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordFie
 @Indexed
 public class LegalDocument extends AbstractEntity {
 
-
     @FullTextField
     @Column(length = 1024)
     private String title;
@@ -30,7 +27,7 @@ public class LegalDocument extends AbstractEntity {
     @KeywordField(name = "titleShort")
     private String titleShort;
 
-    @KeywordField(aggregable = Aggregable.YES)
+    @KeywordField(name = "abbreviation", aggregable = Aggregable.YES)
     private String abbreviation;
 
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL)
